@@ -8,23 +8,37 @@
        <div class="collapse navbar-collapse" id="navbarColor02">
           <ul class="navbar-nav mr-auto">
              <li class="nav-item active">
-                <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add Statut consultation <span class="sr-only">(current)</span></a>
+               <a class="btn btn-outline-primary" (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true">Add Statut consultation</a>
+                <!--<a class="nav-link" (click)="onOpenModal(null!, 'add')">Add Statut consultation <span class="sr-only">(current)</span></a>-->
              </li>
           </ul>
    </div>
  </nav>
 <div class="container" id="main-container">
-    <div class="row">
-      
+   <table class="table table-bordered table-striped">
+      <tr>
+   
+         <th scope="col">Statut Consultation</th>
+         <th></th>
+       </tr>
+       <tbody>
+         <tr *ngFor="let statutConsultation of statutConsultations" class="col-md-6 col-xl-3">
+           <td>{{statutConsultation?.statutConsultation}}</td>
+           <td><a (click)="onOpenModal(statutConsultation, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a></td>
+           <td><a (click)="onOpenModal(statutConsultation, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a></td>
+         </tr>
+           </tbody>
+      </table>
+<!--
+    <div class="row"> 
         <div *ngFor="let statutConsultation of statutConsultations" class="col-md-6 col-xl-3">
             <div class="card m-b-30">
                 <ul class="list-group list-group-flush">
-                   <li class="list-group-item"><i class=""></i>IDF StatutConsultaion : <a href="#">{{statutConsultation?.idf_StatutConsultaion}}</a></li>
                     <li class="list-group-item"><i class=""></i>Statut Consultation : <a href="#">{{statutConsultation?.statutConsultation}}</a></li>
                 </ul>
                 <div class="card-body">
                     <div class="float-right btn-group btn-group-sm">
-                        <a (click)="onOpenModal(statutConsultation, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(statutConsultation, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
                         <a (click)="onOpenModal(statutConsultation, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
                     </div>
                 </div>
@@ -32,7 +46,7 @@
         </div>
     </div>
 </div>
-
+-->
    <!-- Add Employee Modal -->
    <div class="modal fade" id="addStatutConsultationModal" tabindex="-1" role="dialog" aria-labelledby="addStatutConsultationModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -43,13 +57,22 @@
               <span aria-hidden="true">&times;</span>
               </button>
            </div>
+          
            <div class="modal-body">
               <form #addForm="ngForm" (ngSubmit)="onAddStatutConsultation(addForm)" novalidate>
+               <!--
               <div class="form-group">
-                 <input type="text" ngModel name="statutConsultation" class="form-control" id="statutConsultation" placeholder="statutConsultation" >
-  
-  
-              </div>
+                 <input type="text" ngModel name="statutConsultation" class="form-control" id="statutConsultation" placeholder="statutConsultation" ></div>
+              -->
+              
+           <div class="form-group">
+            <label for="statutConsultation">Statut Consultation</label>
+                <select ngModel name="statutConsultation" id="statutConsultation">
+                <option value="Annulée">Annulée</option>
+                <option value="En_Cours">En Cours</option>
+                <option value="Terminée">Terminée</option>
+                </select>
+          </div>
               <div class="modal-footer">
                  <button type="button" id="add-StatutConsultation-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
                  <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save </button>
@@ -81,7 +104,12 @@
               </div>
               <div class="form-group">
                 <label for="statutConsultation">StatutConsultation</label>
-                <input type="text" ngModel="{{editStatutConsultation?.statutConsultation}}" name="statutConsultation" class="form-control" id="statutConsultation" aria-describedby="emailHelp" placeholder="statutConsultation">
+                <select ngModel="{{editStatutConsultation?.statutConsultation}}" name="statutConsultation" id="statutConsultation">
+                  <option value="Annulée">Annulée</option>
+                  <option value="En_Cours">En Cours</option>
+                  <option value="Terminée">Terminée</option>
+                  </select>
+                <!--<input type="text" ngModel="{{editStatutConsultation?.statutConsultation}}" name="statutConsultation" class="form-control" id="statutConsultation" aria-describedby="emailHelp" placeholder="statutConsultation">-->
              </div>          
               <div class="modal-footer">
                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>

@@ -5,7 +5,7 @@ export class Client {
     nom: string;
 	codeClient: string;
 	adresse: string;
-	téléphone: string;
+	telephone: string;
 	fax: string;
 	adresseEMail: string;
 	pays: string;
