@@ -1,0 +1,213 @@
+<p>NOS CLIENTS</p>
+<nav class="navbar navbar-expand-lg navbar-toggler bg-white">
+   <a class="navbar-brand" style="color:white;">Client Manager</a>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+             <li class="nav-item active">
+               <a class="btn btn-outline-primary" (click)="onOpenModal(null!, 'add')" role="button" aria-pressed="true">Add Client</a>
+               <!-- <a class="nav-link" (click)="onOpenModal(null!, 'add')">Add Client <span class="sr-only">(current)</span></a>-->
+             </li>
+          </ul>
+   </div>
+ </nav>
+<div class="container" id="main-container">
+   <table class="table table-bordered table-striped">
+      <tr>
+   
+         <th scope="col">Code Client</th>
+         <th scope="col">Nom</th>
+         <th scope="col">Prénom du Client</th>
+         <th scope="col">Adresse</th>
+         <th scope="col">Téléphone</th>
+         <th></th>
+       </tr>
+       <tbody>
+         <tr *ngFor="let client of clients" class="col-md-6 col-xl-3">
+           <td>{{client?.codeClient}}</td>
+           <td>{{client?.nom}}</td>
+           <td>{{client?.prenomClient}}</td>
+           <td>{{client?.adresse}}</td>
+           <td>{{client?.telephone}}</td>
+           <td><a (click)="onOpenModal(client, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a></td>
+           <td><a (click)="onOpenModal(client, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a></td>
+         </tr>
+           </tbody>
+      </table>
+
+    <!--<div class="row">
+       <div *ngFor="let client of clients" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                <ul class="list-group list-group-flush">
+                   <li class="list-group-item"><i class=""></i>Code Client : <a href="#">{{client?.codeClient}}</a></li>
+                    <li class="list-group-item"><i class=""></i>Nom : <a href="#">{{client?.nom}}</a></li>
+                    <li class="list-group-item"><i class=""></i>Prénom du Client : <a href="#">{{client?.prenomClient}}</a></li>
+                    <li class="list-group-item"><i class=""></i>Adresse : <a href="#">{{client?.adresse}}</a></li>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenModal(client, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-wrench"></i> </a>
+                        <a (click)="onOpenModal(client, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+   <!-- Add Employee Modal -->
+   <div class="modal fade" id="addClientModal" tabindex="-1" role="dialog" aria-labelledby="addClientModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           <div class="modal-header">
+              <h5 class="modal-title" id="addClientModalLabel">Add Client</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+           </div>
+           <div class="modal-body">
+              <form #addForm="ngForm" (ngSubmit)="onAddClient(addForm)" novalidate>
+              <div class="form-group">
+                 <input type="text" ngModel name="codeClient" class="form-control" id="codeClient" placeholder="codeClient" >
+                 <input type="text" ngModel name="nom" class="form-control" id="nom" placeholder="nom" >
+                 <input type="text" ngModel name="prenomClient" class="form-control" id="prenomClient" placeholder="prenomClient" >
+                 <input type="text" ngModel name="adresse" class="form-control" id="adresse" placeholder="adresse" >
+                 <input type="text" ngModel name="telephone" class="form-control" id="telephone" placeholder="telephone" >
+                 <input type="text" ngModel name="fax" class="form-control" id="fax" placeholder="fax" >
+                 <input type="text" ngModel name="adresseEMail" class="form-control" id="adresseEMail" placeholder="adresseEMail" >
+                 <input type="text" ngModel name="pays" class="form-control" id="pays" placeholder="pays" >
+                 <input type="text" ngModel name="gsm" class="form-control" id="gsm" placeholder="gsm" >
+                 <input type="text" ngModel name="observations" class="form-control" id="observations" placeholder="observations" >
+                 <input type="text" ngModel name="codePostal" class="form-control" id="codePostal" placeholder="codePostal" >
+                 <input type="text" ngModel name="ville" class="form-control" id="ville" placeholder="ville" >
+                 <input type="text" ngModel name="civilité" class="form-control" id="civilité" placeholder="civilité" >
+                 <input type="text" ngModel name="adresseSuite" class="form-control" id="adresseSuite" placeholder="adresseSuite" >
+                 <input type="text" ngModel name="typeClient" class="form-control" id="typeClient" placeholder="typeClient" >
+                 <input type="text" ngModel name="société" class="form-control" id="société" placeholder="société" >
+                 <input type="text" ngModel name="rcs" class="form-control" id="rcs" placeholder="rcs" >
+                 <input type="text" ngModel name="numTVA" class="form-control" id="numTVA" placeholder="numTVA" >
+                 <input type="text" ngModel name="lcr" class="form-control" id="lcr" placeholder="lcr" >
+                 <input type="text" ngModel name="iban" class="form-control" id="iban" placeholder="iban" >
+                 <input type="text" ngModel name="banque" class="form-control" id="banque" placeholder="banque" >
+                 <input type="text" ngModel name="enCoursAutorisé" class="form-control" id="enCoursAutorisé" placeholder="enCoursAutorisé" >
+                 <input type="text" ngModel name="exemptTVA" class="form-control" id="exemptTVA" placeholder="exemptTVA" >
+                 <input type="text" ngModel name="datefinExo" class="form-control" id="datefinExo" placeholder="datefinExo" >
+                 <input type="text" ngModel name="numEoneration" class="form-control" id="numEoneration" placeholder="numEoneration" >
+                 <input type="text" ngModel name="datedebutExo" class="form-control" id="datedebutExo" placeholder="datedebutExo" >
+                 <input type="text" ngModel name="photo" class="form-control" id="photo" placeholder="photo" >
+                 <input type="text" ngModel name="dateNaissance" class="form-control" id="dateNaissance" placeholder="dateNaissance" >
+                 <input type="text" ngModel name="arappeler" class="form-control" id="arappeler" placeholder="arappeler" >
+                 <input type="text" ngModel name="adresseIP" class="form-control" id="adresseIP" placeholder="adresseIP" >
+                 <input type="text" ngModel name="motDePasse" class="form-control" id="motDePasse" placeholder="motDePasse" >
+                 <input type="text" ngModel name="question" class="form-control" id="question" placeholder="question" >
+                 <input type="text" ngModel name="réponse" class="form-control" id="réponse" placeholder="réponse" >
+                 <input type="text" ngModel name="nomAdresse" class="form-control" id="nomAdresse" placeholder="nomAdresse" >
+                 <input type="text" ngModel name="saisiPar" class="form-control" id="saisiPar" placeholder="saisiPar" >
+                 <input type="text" ngModel name="saisiLe" class="form-control" id="saisiLe" placeholder="saisiLe" >
+                 <input type="text" ngModel name="auteurModif" class="form-control" id="auteurModif" placeholder="auteurModif" >
+                 <input type="text" ngModel name="dateModif" class="form-control" id="dateModif" placeholder="dateModif" >
+                 <input type="text" ngModel name="adresseEMailNomAdresse" class="form-control" id="adresseEMailNomAdresse" placeholder="adresseEMailNomAdresse" >
+                 <input type="text" ngModel name="représentant" class="form-control" id="représentant" placeholder="représentant" >
+                 <input type="text" ngModel name="ancienCode" class="form-control" id="ancienCode" placeholder="ancienCode" >
+                 <input type="text" ngModel name="login" class="form-control" id="login" placeholder="login" >
+                 <input type="text" ngModel name="r1_NOM" class="form-control" id="r1_NOM" placeholder="r1_NOM" >
+                 <input type="text" ngModel name="r1_Date_de_naissance" class="form-control" id="r1_Date_de_naissance" placeholder="r1_Date_de_naissance" >
+                 <input type="text" ngModel name="r1_N_CIN" class="form-control" id="r1_N_CIN" placeholder="r1_N_CIN" >
+                 <input type="text" ngModel name="r1_Date_CIN" class="form-control" id="r1_Date_CIN" placeholder="r1_Date_CIN" >
+                 <input type="text" ngModel name="r1_Adresse" class="form-control" id="r1_Adresse" placeholder="r1_Adresse" >
+                 <input type="text" ngModel name="r1Qualité" class="form-control" id="r1Qualité" placeholder="r1Qualité" >
+                 <input type="text" ngModel name="r1_N_TEL" class="form-control" id="r1_N_TEL" placeholder="r1_N_TEL" >
+                 <input type="text" ngModel name="r1_E_mail" class="form-control" id="r1_E_mail" placeholder="r1_E_mail" >
+                 <input type="text" ngModel name="r2_NOM" class="form-control" id="r2_NOM" placeholder="r2_NOM" >
+                 <input type="text" ngModel name="r2_Date_de_naissance" class="form-control" id="r2_Date_de_naissance" placeholder="r2_Date_de_naissance" >
+                 <input type="text" ngModel name="r_2N_CIN" class="form-control" id="r_2N_CIN" placeholder="r_2N_CIN" >
+                 <input type="text" ngModel name="r2_Date_CIN" class="form-control" id="r2_Date_CIN" placeholder="r2_Date_CIN" >
+                 <input type="text" ngModel name="r2_Adresse" class="form-control" id="r2_Adresse" placeholder="r2_Adresse" >
+                 <input type="text" ngModel name="r2_Qualité" class="form-control" id="r2_Qualité" placeholder="r2_Qualité" >
+                 <input type="text" ngModel name="r2_N_TEL" class="form-control" id="r2_N_TEL" placeholder="r2_N_TEL" >
+                 <input type="text" ngModel name="r2_Email" class="form-control" id="r2_Email" placeholder="r2_Email" >
+                 <input type="text" ngModel name="capital_Social" class="form-control" id="capital_Social" placeholder="capital_Social" >
+                 <input type="text" ngModel name="valeur_Nominale" class="form-control" id="valeur_Nominale" placeholder="valeur_Nominale" >
+                 <input type="text" ngModel name="nbre_de_parts" class="form-control" id="nbre_de_parts" placeholder="nbre_de_parts" >
+  
+  
+              </div>
+              <div class="modal-footer">
+                 <button type="button" id="add-Client-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save</button>
+              </div>
+              </form>
+           </div>
+        </div>
+      </div>
+  </div>
+  
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateClientModal" tabindex="-1" role="dialog" aria-labelledby="clientEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateClientModalLabel">Edit Client {{editClient?.codeClient}}</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+            <input type="hidden" ngModel="{{editClient?.numClient}}" name="numClient" class="form-control" id="numClient" placeholder="numClient">
+
+              <div class="form-group">
+                 <label for="codeClient">CodeClient</label>
+                 <input type="text" ngModel="{{editClient?.codeClient}}" name="codeClient" class="form-control" id="codeClient" aria-describedby="emailHelp" placeholder="codeClient">
+              </div>
+              <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" ngModel="{{editClient?.nom}}" name="nom" class="form-control" id="nom" aria-describedby="emailHelp" placeholder="nom">
+             </div>
+             <div class="form-group">
+              <label for="prenomClient">PrenomClient</label>
+              <input type="text" ngModel="{{editClient?.prenomClient}}" name="prenomClient" class="form-control" id="prenomClient" placeholder="prenomClient">
+           </div>
+              <div class="form-group">
+                 <label for="adresse">Adresse</label>
+                 <input type="adresse" ngModel="{{editClient?.adresse}}" name="adresse" class="form-control" id="adresse" placeholder="adresse">
+              </div> 
+              <div class="form-group">
+               <label for="telephone">Adresse</label>
+               <input type="telephone" ngModel="{{editClient?.telephone}}" name="telephone" class="form-control" id="telephone" placeholder="telephone">
+            </div>        
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="onUpdateClient(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteClientModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Delete Client</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Are you sure you want to delete Client {{deleteClient?.numClient}}?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteClient(deleteClient?.numClient)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+           </div>
+        </div>
+     </div>
+  
+</div>
