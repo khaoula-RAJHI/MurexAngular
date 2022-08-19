@@ -1,0 +1,29 @@
+
+
+.div-btn {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:auto;
+    flex-direction: column;
+
+}
+.btn-login {
+    background-color: white;
+    padding:10px;
+    min-height: 3rem;
+    width: 10rem;
+    border-radius: 2rem;
+    border:1px solid #018ABE ;
+    transition: 0.5s ease-in-out;
+    color:#018ABE;  
+}
+
+.btn-login:hover {
+    background-color: white;
+   background-color: #018ABE;    color:white;
+
+
+
+}

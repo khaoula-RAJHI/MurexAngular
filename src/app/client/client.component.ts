@@ -89,4 +89,10 @@ export class ClientComponent implements OnInit {
     container?.appendChild(button);
     button.click();
   }
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+
+    this.route.navigate(['/login']);
+}
 }

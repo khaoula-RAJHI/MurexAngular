@@ -1,0 +1,175 @@
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-white bg-white">
+   <a class="navbar-brand" style="color:rgb(0, 0, 0);">Users Manager</a>
+   <button class="btn btn-light" [routerLink]="['/registration']" type="button">Add User</button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+   
+     <ul class="navbar-nav mr-auto">
+        <li class="nav-item active"> </li>
+     </ul>
+     
+     <form class="form-inline my-2 my-lg-0">
+        <input type="search" (ngModelChange)="searchUsers(key.value)" #key="ngModel" ngModel
+         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search users..." required>
+
+         <button class="btn btn-lg " [routerLink]="['/menu']">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-auto text-gray-800"></i>
+            Return
+          </button>
+         
+     </form>
+     
+  </div>
+  
+</nav>
+<br>
+
+
+
+
+<div class="container" id="main-container">
+    <div class="row">
+      
+        <div *ngFor="let user of users" class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-title align-self-center mb-0">
+                        <h5>{{user?.firstName}}</h5>
+                        <h5>{{user?.lastName}}</h5>
+                        <p class="m-0">{{user?.role}}</p>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                   <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Email : <a href="#">{{user?.email}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : <a href="#">{{user?.telephone}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Adress : <a href="#">{{user?.adress}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Description : <a href="#">{{user?.description}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-times float-right"></i>Date de Creation : <a href="#">{{user?.datecreation}}</a></li>
+                  <!-- <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Password : <a href="#">{{user?.password}}</a></li> 
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Locked! : <a href="#">{{user?.locked}}</a></li>
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>Enabled! : <a href="#">{{user?.enabled}}</a></li>
+                    -->
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenModal(user, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(user, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i> </a>
+                    </div>
+                    <ul class="social-links list-inline mb-0">
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Facebook"><i class="fa fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a title="" data-placement="top" data-toggle="tooltip" class="tooltips" href="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="userEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="updateUserModalLabel">Edit User {{editUser?.email}}</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <form #editForm="ngForm">
+            <input type="hidden" ngModel="{{editUser?.id}}" name="id" class="form-control" id="id" placeholder="id">
+            <input type="hidden" ngModel="{{editUser?.datecreation}}" name="datecreation" class="form-control" id="datecreation" placeholder="datecreation">
+    <!--   <input type="hidden" ngModel="{{editUser?.enabled}}" name="enabled" class="form-control" id="enabled" placeholder="enabled">
+            <input type="hidden" ngModel="{{editUser?.locked}}" name="locked" class="form-control" id="locked" placeholder="locked">
+            <input type="hidden" ngModel="{{editUser?.password}}" name="password" class="form-control" id="password" placeholder="password">
+    -->
+
+              <div class="form-group">
+                 <label for="firstName">firstName</label>
+                 <input type="text" ngModel="{{editUser?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="firstName">
+              </div>
+              <div class="form-group">
+                <label for="lastName">lastName</label>
+                <input type="text" ngModel="{{editUser?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="lastName">
+             </div>
+             <div class="form-group">
+              <label for="role">Role</label>
+              <input type="text" ngModel="{{editUser?.role}}" name="role" class="form-control" id="role" placeholder="role">
+           </div>
+              <div class="form-group">
+                 <label for="email">Email Address</label>
+                 <input type="email" ngModel="{{editUser?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="telephone">Phone</label>
+                <input type="text" ngModel="{{editUser?.telephone}}" name="telephone" class="form-control" id="telephone" name="telephone" placeholder="telephone">
+             </div>
+             <div class="form-group">
+              <label for="adress">Adress</label>
+              <input type="text" ngModel="{{editUser?.adress}}" name="adress" class="form-control" id="adress" name="adress" placeholder="adress">
+           </div>
+           <div class="form-group">
+            <label for="description">description</label>
+            <input type="text" ngModel="{{editUser?.description}}" name="description" class="form-control" id="description" placeholder="description">
+         </div>              
+              <div class="modal-footer">
+                 <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                 <button (click)="onUpdateUser(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+              </div>
+           </form>
+        </div>
+     </div>
+  </div>
+</div>
+
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h5 class="modal-title" id="deleteModelLabel">Delete User</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <p>Are you sure you want to delete User {{deleteUser?.email}}?</p>
+           <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteUser(deleteUser?.email)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+
+<!-- Notification for no users -->
+<div *ngIf="users?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+<div class="alert alert-info" role="alert">
+  <h4 class="alert-heading">NO USERS!</h4>
+  <p>No Users were found.</p>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
